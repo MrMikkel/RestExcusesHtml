@@ -1,4 +1,5 @@
-const baseUrl="https://excuser.herokuapp.com/v1/excuse/100"
+const fakebaseUrl="https://excuser.herokuapp.com/v1/excuse/100"
+const baseUrl="https://restexcuses.azurewebsites.net/api/Excuse"
 
 const app = Vue.createApp({
     data(){
