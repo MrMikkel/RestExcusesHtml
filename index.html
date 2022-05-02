@@ -13,8 +13,8 @@
 
 <body>
     <div id="app">
-        <button v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
-        <table class="tabel" id="getExcuses" v-if="excuses.length > 0">
+        <button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
+        <table class="tabel" id="getAllExcuses" v-if="excuses.length > 0">
             <tr>
                 <th>
                     Excuses
