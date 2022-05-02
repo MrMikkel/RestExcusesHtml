@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Undskyldnings8-Ball</title>
 </head>
 <body>
-    
+    <div id="app"> 
+          <button v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
+        <table class="tabel" id="getExcuses" v-if="excuses.length > 0">
+            <tr>
+                <th>
+                    Excuses
+                </th>
+            </tr>
+            <tr v-for="excuse in excuses">
+                <td>
+                    {{ excuse }}
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

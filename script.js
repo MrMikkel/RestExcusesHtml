@@ -1,4 +1,4 @@
-const baseUrl="https://"
+const baseUrl="https://excuser.herokuapp.com/v1/excuse/100"
 
 const app = Vue.createApp({
     data(){
