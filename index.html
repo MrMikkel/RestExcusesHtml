@@ -5,29 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <!-- Vue.js -->
     <script src="https://unpkg.com/vue@next"></script>
     <title>Undskyldnings8-Ball</title>
 </head>
 
 <body>
     <div id="app">
+        <!-- Knap -->
         <button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
+        <!-- Tabel -->
         <table class="tabel" id="getAllExcuses" v-if="excuses.length > 0">
+            <!-- Table Row -->
             <tr>
+                <!-- Table Header -->
                 <th>
                     Excuses
                 </th>
             </tr>
+            <!-- Table Row m. for-loop, der løber igennem listen fra js -->
             <tr v-for="excuse in excuses">
+                <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
                 <td>
                     {{ excuse.excuse }}
                 </td>
             </tr>
-
         </table>
     </div>
+    <!-- Javascript-reference -->
     <script src="script.js"></script>
 </body>
 
