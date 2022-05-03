@@ -1,25 +1,25 @@
+// URL defineres
 const fakebaseUrl="https://excuser.herokuapp.com/v1/excuse/100"
 const baseUrl="https://restexcuses.azurewebsites.net/api/Excuse"
-
+// app oprettes
 const app = Vue.createApp({
-    data(){
+    data(){ // appens værdier defineres
         return{
-            excuses:[] //tomt array
-
+            excuses:[] // tomt array med plads til alverdens undskyldninger
         }
     },
     methods: {
-        getAllSelfGeneratedExcuses(){
+        getAllSelfGeneratedExcuses(){ // GET-metode til at hente alle selvoprettede undskyldninger
             this.getAllSelfGeneratedExcusesHelper(baseUrl)
         },
-        async getAllSelfGeneratedExcusesHelper(url){
-            try { //fejlhåndtering
-                const result = await axios.get(url)
-                this.excuses = result.data
-                console.log(this.excuses)
-            }catch(ex){ //exception
-                alert(ex.message)
+        async getAllSelfGeneratedExcusesHelper(url){ // helper-metode til at hente alle selvoprettede undskyldninger
+            try { // fejlhåndtering
+                const result = await axios.get(url) // axios laver http-request til REST-service
+                this.excuses = result.data // array bliver fyldt med data
+                console.log(this.excuses) // udskrift til konsollen
+            }catch(ex){ // exception
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
         }
     }
-}).mount("#app")
+}).mount("#app") // appen bliver mounted
