@@ -19,37 +19,26 @@
 <body>
     <div id="app">
         <div class="container">
+            <h2>Excuses self-generated</h2>
             <!-- Knap -->
             <button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
-            <!-- Tabel -->
-            <table class="tabel" id="getAllExcuses" v-if="excuses.length > 0">
-                <!-- Table Row -->
-                <tr>
-                    <!-- Table Header -->
-                    <th>
-                        Excuses
-                    </th>
-                </tr>
-                <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                <tr v-for="excuse in excuses">
-                    <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                    <td>
-                        {{ excuse.excuse }}
-                    </td>
-                </tr>
-            </table>
             <br>
             <br>
             <!-- Bootstrap Row med col -->
             <div class="row">
-                <div class="col" style="background-color: blueviolet;">
+                <div class="col">
                     <div class="displayDiv">
-                        <h2>Display</h2>
-                        <p>Some excuse input here!</p>
+                        <div id="getAllExcuses" v-if="excuses.length > 0">
+                            <!-- Table Row m. for-loop, der løber igennem listen fra js -->
+                            <div v-for="excuse in excuses">
+                                <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
+                                {{ excuse.excuse }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <!--row slut-->
         </div>
         <!--container slut-->
     </div>

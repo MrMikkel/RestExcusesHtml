@@ -1,8 +1,13 @@
+body {
+    background-image: url('img/magic8ball.png');
+    background-repeat: no-repeat;
+}
+
 .displayDiv {
     width: 400px;
     height: 100px;
     border: 5px outset blue;
     background-color: whitesmoke;    
     text-align: center;
-    
   }
+
