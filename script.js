@@ -4,7 +4,7 @@ const baseUrl="https://restexcuses.azurewebsites.net/api/Excuse" // egen REST-AP
 const baseMovementUrl="https://restexcuses.azurewebsites.net/api/Movement" // egen movement REST-API
 const familyUrl="https://excuser.herokuapp.com/v1/excuse/family/" //Familie API
 const partyUrl="https://excuser.herokuapp.com/v1/excuse/party/" //party API
-const colleageUrl="https://excuser.herokuapp.com/v1/excuse/college" //Collage API
+const collegeUrl="https://excuser.herokuapp.com/v1/excuse/college" //College API
 const workUrl="https://excuser.herokuapp.com/v1/excuse/office" //work API
 
 
@@ -51,6 +51,27 @@ const app = Vue.createApp({
             if (this.currentMovement == "right")
             {
                 this.getAllSelfGeneratedExcusesHelper(familyUrl)
+                //kalde ??
+            }
+            if (this.currentMovement == "left")
+            {
+                this.getAllSelfGeneratedExcusesHelper(workUrl)
+                //
+            }
+            if (this.currentMovement == "front")
+            {
+                this.getAllSelfGeneratedExcusesHelper(collegeUrl)
+                //
+            }
+            if (this.currentMovement == "back")
+            {
+                this.getAllSelfGeneratedExcusesHelper(partyUrl)
+                //
+            }
+            if (this.currentMovement == "shake")
+            {
+                this.getAllSelfGeneratedExcusesHelper(baseUrl)
+                //
             }
 
         },
