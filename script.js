@@ -1,6 +1,6 @@
 // URL defineres
-const fakebaseUrl="https://excuser.herokuapp.com/v1/excuse/100"
-const baseUrl="https://restexcuses.azurewebsites.net/api/Excuse"
+const fakebaseUrl="https://excuser.herokuapp.com/v1/excuse/100" // tredjeparts-API
+const baseUrl="https://restexcuses.azurewebsites.net/api/Excuse" // egen REST-API
 // app oprettes
 const app = Vue.createApp({
     data(){ // appens værdier defineres
