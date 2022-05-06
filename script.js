@@ -12,7 +12,7 @@ const app = Vue.createApp({
     data(){ // appens værdier defineres
         return{
             excuses:[], // tomt array med plads til alverdens undskyldninger
-            currentMovement:"", //
+            currentMovement:"test", //
             currentCategory:"", //
         }
     },
