@@ -11,35 +11,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
     <!-- Vue.js -->
     <script src="https://unpkg.com/vue@next"></script>
+    <!--Own CSS-->
+    <link rel="stylesheet" href="style.css">
     <title>Undskyldnings8-Ball</title>
 </head>
 
 <body>
     <div id="app">
-        <!-- Knap -->
-        <button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
-        <!-- Tabel -->
-        <table class="tabel" id="getAllExcuses" v-if="excuses.length > 0">
-            <!-- Table Row -->
-            <tr>
-                <!-- Table Header -->5
-                <th>
-                    Excuses!
-                </th>
-            </tr>
-            <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-            <tr v-for="excuse in excuses">
-                <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                <td>
-                    {{ excuse.excuse }}
-                </td>
-            </tr>
-        </table>
-        <button id="getMovementButton" v-on:click="senseMovement()" type="button">Get All Movement</button>
-
-        {{ currentMovement }}
+        <div class="container">
+            <h2>Excuses generated</h2>
+            <br>
+            <br>
+            <!-- Bootstrap Row med col -->
+            <div class="row">
+              <!--empty-->
+            </div>
+                <div class="col">
+                  <!--empty-->
+                </div>
+             
+              <div class="row">
+                <div class="col">
+                </div>
+                    <div class="col-sm backImg">
+                        <!--get all button-->
+                    <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
+                    <button id="currentMovement" v-on:click="senseMovement()" type="button">Get All movements</button>-->
+                    <div class="displayDiv">
+                        <div id="getAllExcuses" v-if="excuses.length > 0">
+                            <!-- Table Row m. for-loop, der løber igennem listen fra js -->
+                            <div v-for="excuse in excuses">
+                                <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
+                                {{ excuse.excuse }}
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col">
+                  <!---empty-->
+                </div>
+              </div> 
+            
+                    
+                </div>
+            </div>
+            <!--row slut-->
+        </div>
+        <!--container slut-->
     </div>
-    
+    <!--app id slut-->
+
     <!-- Javascript-reference -->
     <script src="script.js"></script>
 </body>

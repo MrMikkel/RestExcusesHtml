@@ -47,7 +47,6 @@ const app = Vue.createApp({
                         oldTimestamp = this.currentMovement.timeStamp
                         await this.sleep(1000)
                     }
-                    
                 }
                 catch (ex) {
                     alert(ex.message)
