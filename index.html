@@ -24,17 +24,22 @@
             <br>
             <!-- Bootstrap Row med col -->
             <div class="row">
-              <!--empty-->
+                <!--empty-->
             </div>
+            <div class="col">
+                <!--empty-->
+            </div>
+
+            <div class="row">
                 <div class="col">
-                  <!--empty-->
+                    <input placeholder="Ny undskyldning her..." type="text" v-model="typedWord" style="width: 300px;">
+                    <button id="CreateButton" v-on:click="Create()" type="button"> Opret undskyldning </button>
+                    <div id="CreateExcuse">
+                        {{}}
+                    </div>
                 </div>
-             
-              <div class="row">
-                <div class="col">
-                </div>
-                    <div class="col-sm backImg">
-                        <!--get all button-->
+                <div class="col-sm backImg">
+                    <!--get all button-->
                     <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
                     <button id="currentMovement" v-on:click="senseMovement()" type="button">Get All movements</button>-->
                     <div class="displayDiv">
@@ -45,21 +50,21 @@
                                 {{ excuse.excuse }}
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="col">
-                  <!---empty-->
-                </div>
-              </div> 
-            
-                    
+                    <!---empty-->
                 </div>
             </div>
-            <!--row slut-->
+
+
         </div>
-        <!--container slut-->
     </div>
+    <!--row slut-->
+
+    <!--container slut-->
+
     <!--app id slut-->
 
     <!-- Javascript-reference -->
