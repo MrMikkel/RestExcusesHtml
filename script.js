@@ -16,7 +16,9 @@ const app = Vue.createApp({
             excuses: [], // tomt array med plads til alverdens undskyldninger
             currentMovement: "test", // string 
             currentCategory: "", // string fra den 5 forskellige kategorier
-            check: null // tjekker for hvis den er tom
+            check: null, // tjekker for hvis den er tom
+            newExcuse: {id:0, excuse:""}, // variabel opret ny unskyldning 
+            postMessage: ""
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -29,10 +31,19 @@ const app = Vue.createApp({
         },
         async getAllSelfGeneratedExcusesHelper(url) { // helper-metode til at hente alle selvoprettede undskyldninger
             try { // fejlhåndtering
-                const result = await axios.get(url) // axios laver http-request til REST-service
+                const result = await axios.get(url) // axios laver http-request(get) til REST-service
                 this.excuses = result.data // array bliver fyldt med data
                 console.log(this.excuses) // udskrift til konsollen
             } catch (ex) { // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+        },
+        async postSelfGeneratedExcuses(){//opret metoden
+            try{
+                const result = await axios.post(baseUrl, this.newExcuse) // axios laver http-request(post) til REST-service
+                this.postMessage= "Response: " + result.status + " " + result.statusText //post message updateres
+                this.getAllSelfGeneratedExcuses() // henter listen igen
+            } catch(ex){ // exception 
                 alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
         },

@@ -32,10 +32,10 @@
 
             <div class="row">
                 <div class="col">
-                    <input placeholder="Ny undskyldning her..." type="text" v-model="typedWord" style="width: 300px;">
-                    <button id="CreateButton" v-on:click="Create()" type="button"> Opret undskyldning </button>
+                    <input placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse" style="width: 300px;">
+                    <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button"> Opret undskyldning </button>
                     <div id="CreateExcuse">
-                        {{}}
+                        {{ postMessage }}
                     </div>
                 </div>
                 <div class="col-sm backImg">
