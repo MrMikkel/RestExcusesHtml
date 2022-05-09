@@ -14,12 +14,13 @@ const app = Vue.createApp({
     data() { // appens værdier defineres
         return {
             excuses: [], // tomt array med plads til alverdens undskyldninger
-            currentMovement: "test", //
-            currentCategory: "", //
-            check: null
+            currentMovement: "test", // string 
+            currentCategory: "", // string fra den 5 forskellige kategorier
+            check: null // tjekker for hvis den er tom
         }
     },
-    created() {
+    created() { // Livcyklus-metoder, der står inde i created(), 
+        //bliver kaldt ved appens "fødsel", aka start, når programmet starter køre metoden
         this.senseMovement()
     },
     methods: {
@@ -31,49 +32,50 @@ const app = Vue.createApp({
                 const result = await axios.get(url) // axios laver http-request til REST-service
                 this.excuses = result.data // array bliver fyldt med data
                 console.log(this.excuses) // udskrift til konsollen
-            } catch (ex) { // exception
+            } catch (ex) { // exception 
                 alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
         },
-        async senseMovement() {
-            oldTimestamp = ""
-            while (true) {
+        async senseMovement() { //hvis der rykkes på pien så senseMovment modtager bevægelser
+            oldTimestamp = "" // den sidste bevægelse i pien og det sidste data i databasen
+            while (true) { //Loop der fortsætter hvis den er true ellers stopper den  
+                            // while løkken går i gennem en kodeblok, så længe en specificeret betingelse er sandt  
                 try { //fejlhåndtering
-                    const result = await axios.get(baseMovementUrl)
-                    if (!(result.data.timeStamp === oldTimestamp)) {
-                        this.currentMovement = result.data
-                        console.log(this.currentMovement)
-                        this.getRandomExcuseHelper()
-                        oldTimestamp = this.currentMovement.timeStamp
-                        await this.sleep(1000)
+                    const result = await axios.get(baseMovementUrl) // axios laver http-request til REST-service
+                    if (!(result.data.timeStamp === oldTimestamp)) { //den ikke tage den samme timestamp 2 gang
+                        this.currentMovement = result.data // string bliver fyldt med data
+                        console.log(this.currentMovement) //udskrift til konsollen
+                        this.getRandomExcuseHelper() // kalder på metoden getRandomExcuseHelper()
+                        oldTimestamp = this.currentMovement.timeStamp // den sidste timestamp = den nuværende timestamp
+                        await this.sleep(1000) // sleep i 1000 ms
                     }
                 }
-                catch (ex) {
-                    alert(ex.message)
+                catch (ex) { // Catch-sætningen definerer en kodeblok til at håndtere enhver fejl.
+                    alert(ex.message) // meddeler fejlmelding 
                 }
             }
         },
-        getRandomExcuseHelper() {
+        getRandomExcuseHelper() { //get-metode til at hente alle randome undskyldninger fra kategorier 
             //oversætter bevæg. til kategori
-            if (this.currentMovement.movement == "right") {
+            if (this.currentMovement.movement == "right") { //hvis pien går til højre får den en undskyldning fra familie kategorien 
                 this.getAllSelfGeneratedExcusesHelper(familyUrl)
             }
-            if (this.currentMovement.movement == "left") {
+            if (this.currentMovement.movement == "left") { //hvis pien går til venstre får den en undskyldning fra arbejde kategorien
                 this.getAllSelfGeneratedExcusesHelper(workUrl)
             }
-            if (this.currentMovement.movement == "front") {
+            if (this.currentMovement.movement == "front") { //hvis pien går til frem får den en undskyldning fra skole kategorien
                 this.getAllSelfGeneratedExcusesHelper(collegeUrl)
             }
-            if (this.currentMovement.movement == "back") {
+            if (this.currentMovement.movement == "back") { //hvis pien går til tilbage får den en undskyldning fra fest kategorien
                 this.getAllSelfGeneratedExcusesHelper(partyUrl)
             }
-            if (this.currentMovement.movement == "shake") {
+            if (this.currentMovement.movement == "shake") { //hvis pien rystes får man en selv lavet undskyldning
                 this.getAllSelfGeneratedExcusesHelper(baseUrl)
             }
         },
         // snuppet fra https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
-        sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+        sleep(ms) { // hjemmelavet metode sleep har en dvalefunktion, der vil forsinke et programs udførelse i et givet antal sekunder
+            return new Promise(resolve => setTimeout(resolve, ms)); // et løfte som er ikke f
         }
     }
 }).mount("#app") // appen bliver mounted
