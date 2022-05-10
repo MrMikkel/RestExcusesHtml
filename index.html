@@ -14,6 +14,7 @@
     <!--Own CSS-->
     <link rel="stylesheet" href="style.css">
     <title>Undskyldnings8-Ball</title>
+    
 </head>
 
 <body>
@@ -49,12 +50,21 @@
                       <tr v-for="excuse in excuses" >
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
                         <th scope="row">{{ excuse.id }}</th>
+<<<<<<< HEAD
                         <td>
                             {{ excuse.excuse }}
                         </td>
                         <td>
                             <button v-on:click="deleteExcuse(excuse.id)" id="deleteButton" type="button" class="btn btn-danger">Slet undskyldning</button>
                         </td>
+=======
+                        <td>{{ excuse.excuse }}</td>
+                        <!-- <td >
+                            <button id="UpdateButton" type="button" class="btn btn-warning">Rediger</button>
+
+                        </td> -->
+                      </tr>
+>>>>>>> a77e6b5dfa6c02705b380abc1a208e890c30c037
                     </tbody>
                   </table>
             </div>
