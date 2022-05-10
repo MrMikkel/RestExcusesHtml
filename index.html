@@ -82,11 +82,12 @@
                     <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
                     <button id="currentMovement" v-on:click="senseMovement()" type="button">Get All movements</button>-->
                     <div class="displayDiv">
-                        <div id="getExcuse" v-if="excuses.length > 0">
+                        <div id="getExcuse" v-if="randomExcuse">
                             <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                            <div v-for="excuse in excuses">
+                            {{randomExcuse.excuse}}
+                            <div v-for="excuse in randomExcuse">
                                 <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                                {{ excuse.excuse }}
+                                {{excuse.excuse}}
                             </div>
                         </div>
                     </div>

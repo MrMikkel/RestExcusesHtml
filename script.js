@@ -14,6 +14,7 @@ const app = Vue.createApp({
     data() { // appens værdier defineres
         return {
             excuses: [], // tomt array med plads til alverdens undskyldninger
+            randomExcuse:"",
             currentMovement: "test", // string 
             currentCategory: "", // string fra den 5 forskellige kategorier
             check: null, // tjekker for hvis den er tom
@@ -37,6 +38,18 @@ const app = Vue.createApp({
                 const result = await axios.get(url) // axios laver http-request(get) til REST-service
                 this.excuses = result.data // array bliver fyldt med data
                 console.log(this.excuses) // udskrift til konsollen
+            } catch (ex) { // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+        },
+        async getRandomNewExcusesHelper(url) { // helper-metode til at hente alle selvoprettede undskyldninger
+            try { // fejlhåndtering
+                const result = await axios.get(url) // axios laver http-request(get) til REST-service
+                if(result == null){
+                    this.randomExcuse = ""
+                }
+                this.randomExcuse = result.data // array bliver fyldt med data
+                console.log(this.randomExcuse) // udskrift til konsollen
             } catch (ex) { // exception 
                 alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
@@ -73,19 +86,22 @@ const app = Vue.createApp({
         getRandomExcuseHelper() { //get-metode til at hente alle randome undskyldninger fra kategorier 
             //oversætter bevæg. til kategori
             if (this.currentMovement.movement == "right") { //hvis pien går til højre får den en undskyldning fra familie kategorien 
-                this.getAllSelfGeneratedExcusesHelper(familyUrl)
+                this.getRandomNewExcusesHelper(familyUrl)
             }
-            if (this.currentMovement.movement == "left") { //hvis pien går til venstre får den en undskyldning fra arbejde kategorien
-                this.getAllSelfGeneratedExcusesHelper(workUrl)
+            else if (this.currentMovement.movement == "left") { //hvis pien går til venstre får den en undskyldning fra arbejde kategorien
+                this.getRandomNewExcusesHelper(workUrl)
             }
-            if (this.currentMovement.movement == "front") { //hvis pien går til frem får den en undskyldning fra skole kategorien
-                this.getAllSelfGeneratedExcusesHelper(collegeUrl)
+            else if (this.currentMovement.movement == "front") { //hvis pien går til frem får den en undskyldning fra skole kategorien
+                this.getRandomNewExcusesHelper(collegeUrl)
             }
-            if (this.currentMovement.movement == "back") { //hvis pien går til tilbage får den en undskyldning fra fest kategorien
-                this.getAllSelfGeneratedExcusesHelper(partyUrl)
+            else if (this.currentMovement.movement == "back") { //hvis pien går til tilbage får den en undskyldning fra fest kategorien
+                this.getRandomNewExcusesHelper(partyUrl)
             }
-            if (this.currentMovement.movement == "shake") { //hvis pien rystes får man en selv lavet undskyldning
-                this.getAllSelfGeneratedExcusesHelper(baseUrl)
+            else if (this.currentMovement.movement == "shake") { //hvis pien rystes får man en selv lavet undskyldning
+                this.getRandomNewExcusesHelper(baseUrl+"/random")
+            }
+            else{
+                this.randomExcuse=""
             }
         },
         // snuppet fra https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
