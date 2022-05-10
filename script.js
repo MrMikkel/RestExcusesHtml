@@ -18,7 +18,8 @@ const app = Vue.createApp({
             currentCategory: "", // string fra den 5 forskellige kategorier
             check: null, // tjekker for hvis den er tom
             newExcuse: {id:0, excuse:""}, // variabel opret ny unskyldning 
-            postMessage: ""
+            postMessage: "",
+            pageSwitch: true //bestemmer hvilken side vises
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -87,6 +88,13 @@ const app = Vue.createApp({
         // snuppet fra https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
         sleep(ms) { // hjemmelavet metode sleep har en dvalefunktion, der vil forsinke et programs udførelse i et givet antal sekunder
             return new Promise(resolve => setTimeout(resolve, ms)); // et løfte som er ikke f
+        },
+        switchToList(){
+            this.pageSwitch = false
+            this.getAllSelfGeneratedExcuses()
+        },
+        switchTo8ball(){
+            this.pageSwitch = true
         }
     }
 }).mount("#app") // appen bliver mounted

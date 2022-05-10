@@ -17,8 +17,40 @@
 </head>
 
 <body>
-    <div id="app">
-        <div class="container">
+    <div id="app" class="container">
+        <div v-if="!pageSwitch">
+            <button v-on:click="switchTo8ball()" type="button" class="btn btn-primary">Primary</button>
+            <div class="col">
+                <input id="excuseInput" placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse"
+                    style="width: 300px;">
+                <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button"> Opret undskyldning
+                </button>
+                <div id="CreateExcuse">
+                    {{ postMessage }}
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Undskyldninng</th>
+                      </tr>
+                    </thead>
+                    <tbody id="getAllExcuses">
+                        <!-- Table Row m. for-loop, der løber igennem listen fra js -->
+                      <tr v-for="excuse in excuses">
+                            <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
+                        <th scope="row">{{ excuse.id }}</th>
+                        <td>{{ excuse.excuse }}</td>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        
+        <div v-if="pageSwitch" class="container">
+            <button v-on:click="switchToList()" type="button" class="btn btn-primary">Switch</button>
+
             <h2>Excuses generated</h2>
             <br>
             <br>
@@ -31,13 +63,7 @@
             </div>
 
             <div class="row">
-                <div class="col">
-                    <input placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse" style="width: 300px;">
-                    <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button"> Opret undskyldning </button>
-                    <div id="CreateExcuse">
-                        {{ postMessage }}
-                    </div>
-                </div>
+
                 <div class="col-sm backImg">
                     <!--get all button-->
                     <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
