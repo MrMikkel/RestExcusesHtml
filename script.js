@@ -19,7 +19,9 @@ const app = Vue.createApp({
             check: null, // tjekker for hvis den er tom
             newExcuse: {id:0, excuse:""}, // variabel opret ny unskyldning 
             postMessage: "",
-            pageSwitch: true //bestemmer hvilken side vises
+            pageSwitch: true, //bestemmer hvilken side vises
+            excuseToUpdate: {id:null, excuse:""}, // den undskyldning der skal opdateres, gemmes her             
+            putMessage: "",
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -67,6 +69,7 @@ const app = Vue.createApp({
                 }
             }
         },
+        
         getRandomExcuseHelper() { //get-metode til at hente alle randome undskyldninger fra kategorier 
             //oversætter bevæg. til kategori
             if (this.currentMovement.movement == "right") { //hvis pien går til højre får den en undskyldning fra familie kategorien 
@@ -95,6 +98,16 @@ const app = Vue.createApp({
         },
         switchTo8ball(){
             this.pageSwitch = true
-        }
+        },
+        async updateExcuse(){
+            try{
+                const result = await axios.put(baseUrl+"/"+this.excuseToUpdate.id, this.excuseToUpdate) // axios laver http-request(put) til REST-service
+                this.putMessage= "Response: " + result.status + " " + result.statusText //post message updateres
+                this.getAllSelfGeneratedExcuses() // henter listen igen
+            } catch(ex){ // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+        },
+        
     }
 }).mount("#app") // appen bliver mounted
