@@ -41,18 +41,20 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Undskyldninng</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody id="getAllExcuses">
                         <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                      <tr v-for="excuse in excuses">
+                      <tr v-for="excuse in excuses" >
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
                         <th scope="row">{{ excuse.id }}</th>
-                        <td>{{ excuse.excuse }}</td>
-                        <!-- <td >
-                            <button id="UpdateButton" type="button" class="btn btn-warning">Rediger</button>
-
-                        </td> -->
+                        <td>
+                            {{ excuse.excuse }}
+                        </td>
+                        <td>
+                            <button v-on:click="deleteExcuse(excuse.id)" id="deleteButton" type="button" class="btn btn-danger">Slet undskyldning</button>
+                        </td>
                     </tbody>
                   </table>
             </div>

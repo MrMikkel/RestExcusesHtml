@@ -7,7 +7,7 @@ const partyUrl = "https://excuser.herokuapp.com/v1/excuse/party/" //party API
 const collegeUrl = "https://excuser.herokuapp.com/v1/excuse/college" //College API
 const workUrl = "https://excuser.herokuapp.com/v1/excuse/office" //work API
 
-//const localUrl = "https://localhost:44326/api/Movement"
+const localUrl = "https://localhost:44326/api/Excuse"
 
 // app oprettes
 const app = Vue.createApp({
@@ -101,7 +101,16 @@ const app = Vue.createApp({
         },
         async updateExcuse(){
             try{
-                const result = await axios.put(baseUrl+"/"+this.excuseToUpdate.id, this.excuseToUpdate) // axios laver http-request(put) til REST-service
+                const result = await axios.put(baseUrl, this.excuseToUpdate) // axios laver http-request(put) til REST-service
+                this.putMessage= "Response: " + result.status + " " + result.statusText //post message updateres
+                this.getAllSelfGeneratedExcuses() // henter listen igen
+            } catch(ex){ // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+        },
+        async deleteExcuse(id){
+            try{
+                const result = await axios.delete(baseUrl+"/"+id) // axios laver http-request(Delete) til REST-service
                 this.putMessage= "Response: " + result.status + " " + result.statusText //post message updateres
                 this.getAllSelfGeneratedExcuses() // henter listen igen
             } catch(ex){ // exception 
