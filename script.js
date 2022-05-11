@@ -1,11 +1,12 @@
 // URL defineres
 const fakebaseUrl = "https://excuser.herokuapp.com/v1/excuse/100"
-const baseUrl = "https://restexcuses.azurewebsites.net/api/Excuse"
-const baseMovementUrl = "https://restexcuses.azurewebsites.net/api/Movement" // egen movement REST-API
+const baseUrl = "https://restexcuses.azurewebsites.net/api/Excuses"
+const baseMovementUrl = "https://restexcuses.azurewebsites.net/api/Movements" // egen movement REST-API
 const familyUrl = "https://excuser.herokuapp.com/v1/excuse/family/" //Familie API
 const partyUrl = "https://excuser.herokuapp.com/v1/excuse/party/" //party API
 const collegeUrl = "https://excuser.herokuapp.com/v1/excuse/college" //College API
 const workUrl = "https://excuser.herokuapp.com/v1/excuse/office" //work API
+const historyUrl = "https://restexcuses.azurewebsites.net/api/Movements/topcategories" //history 
 
 // const localUrl = "https://localhost:44326/api/Excuse"
 
@@ -23,6 +24,7 @@ const app = Vue.createApp({
             pageSwitch: 1, //bestemmer hvilken side vises
             excuseToUpdate: {id:null, excuse:""}, // den undskyldning der skal opdateres, gemmes her             
             putMessage: "",
+            showCat: []
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -110,6 +112,7 @@ const app = Vue.createApp({
         },
         switchToHistory(){
             this.pageSwitch = 3
+            this.showCategory()
         },
         switchToList(){
             this.pageSwitch = 2
@@ -136,6 +139,15 @@ const app = Vue.createApp({
                 alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
         },
-        
+        async showCategory(){
+                try { // fejlhåndtering
+                    const result = await axios.get(historyUrl) // axios laver http-request(get) til REST-service
+                    
+                    this.showCat = result.data // array bliver fyldt med data
+                    console.log(this.showCat) // udskrift til konsollen
+                } catch (ex) { // exception 
+                    alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+                } 
+        },
     }
 }).mount("#app") // appen bliver mounted

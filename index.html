@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,12 +13,10 @@
     <!--Own CSS-->
     <link rel="stylesheet" href="style.css">
     <title>Undskyldnings8-Ball</title>
-
 </head>
-
 <body>
     <div id="app" class="container">
-        <!-------------------SE, OPRET OG SLET EN SELV-GENERERT UND.--------------------->
+        <!---- SE, OPRET OG SLET EN SELV-GENERERT UND. ---->
         <div v-if="pageSwitch == 2">
             <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
                 style="margin: 10px">Tilbage</button>
@@ -66,8 +63,7 @@
                 </table>
             </div>
         </div>
-
-        <!-------------------HISTORIK--------------------->
+        <!---- HISTORIK ---->
         <div class="row">
             <div class="col" v-if="pageSwitch == 3">
                 <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
@@ -76,34 +72,26 @@
                 <table class="table categoryStory">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Familie</th>
-                            <th scope="col">Studie</th>
-                            <th scope="col">Fest</th>
-                            <th scope="col">Job</th>
+                            <th scope="col">Kategori</th>
+
+                            <th scope="col">Antal</th>
+
                         </tr>
                     </thead>
-                    <tbody id="getAllExcuses">
+                    <tbody id="showCategory">
                         <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                        <tr v-for="excuse in excuses">
+                        <tr v-for="category in showCat">
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                            <td>{{ excuse.id }}</td>
                             <td>
-                                {{ excuse.excuse }}
+                                {{ category.category }}
                             </td>
-                        </tr>
-                        <tr>
-                            <td>ppp</td>
-                            <td>øøø</td>
-                            <td>æææ</td>
-                            <td>æææ</td>
+                            <td>{{ category.count }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-        <!-------------------HISTORIK SLUT--------------------->
-
-        <!----- PAGESWITCH -->
+        </div><!----SLUT---->
+        <!---- KNAPPER DER SKIFTER PAGE ---->
         <div v-if="pageSwitch == 1" class="container">
             <h2><b>Excuses generated</b></h2>
             <!-- Bootstrap Row med col -->
@@ -113,21 +101,15 @@
                         class="btn btn-dark btn-lg btn-block margin: 10px">Mine undskyldinger</button>
                 </div>
                 <div class="col">
-                    <!-- IGANGVÆRENDE -->
                     <button id="showCatButton" v-on:click="switchToHistory()" type="button"
                         class="btn btn-dark btn-lg btn-block margin: 10px">Vis historik</button>
                 </div>
             </div>
-
-            <!--Show random excuse in 8-ball-->
+            <!--SHOW RANDOM EXCUSE IN 8-BALL-->
             <div class="row">
                 <div class="col-sm">
                 </div>
                 <div class="col-sm backImg center">
-                    <!--get all button-->
-
-                    <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
-                    <button id="currentMovement" v-on:click="senseMovement()" type="button">Get All movements</button>-->
                     <div class="displayDiv">
                         <div id="getExcuse" v-if="randomExcuse">
                             <!-- Table Row m. for-loop, der løber igennem listen fra js -->
@@ -141,16 +123,9 @@
                 </div>
                 <div class="col-sm">
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!--row slut-->
-
-    <!--container slut-->
-
-    <!--app id slut-->
-
+            </div><!--row slut-->
+            </div>   <!--container slut--> 
+            </div>        <!--app id slut-->
     <!-- Javascript-reference -->
     <script src="script.js"></script>
 </body>
