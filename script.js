@@ -7,7 +7,7 @@ const partyUrl = "https://excuser.herokuapp.com/v1/excuse/party/" //party API
 const collegeUrl = "https://excuser.herokuapp.com/v1/excuse/college" //College API
 const workUrl = "https://excuser.herokuapp.com/v1/excuse/office" //work API
 
-const localUrl = "https://localhost:44326/api/Excuse"
+// const localUrl = "https://localhost:44326/api/Excuse"
 
 // app oprettes
 const app = Vue.createApp({

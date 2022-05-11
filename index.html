@@ -54,7 +54,7 @@
                             {{ excuse.excuse }}
                         </td>
                         <td>
-                            <button v-on:click="deleteExcuse(excuse.id)" id="deleteButton" type="button" class="btn btn-danger">Slet undskyldning</button>
+                            <button v-on:click="deleteExcuse(excuse.id)" v-bind:id="excuse.id" type="button" class="btn btn-danger">Slet undskyldning</button>
                         </td>
                     </tbody>
                   </table>
