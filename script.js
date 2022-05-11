@@ -20,7 +20,7 @@ const app = Vue.createApp({
             check: null, // tjekker for hvis den er tom
             newExcuse: {id:0, excuse:""}, // variabel opret ny unskyldning 
             postMessage: "",
-            pageSwitch: true, //bestemmer hvilken side vises
+            pageSwitch: 1, //bestemmer hvilken side vises
             excuseToUpdate: {id:null, excuse:""}, // den undskyldning der skal opdateres, gemmes her             
             putMessage: "",
         }
@@ -108,12 +108,15 @@ const app = Vue.createApp({
         sleep(ms) { // hjemmelavet metode sleep har en dvalefunktion, der vil forsinke et programs udførelse i et givet antal sekunder
             return new Promise(resolve => setTimeout(resolve, ms)); // et løfte som er ikke f
         },
+        switchToHistory(){
+            this.pageSwitch = 3
+        },
         switchToList(){
-            this.pageSwitch = false
+            this.pageSwitch = 2
             this.getAllSelfGeneratedExcuses()
         },
         switchTo8ball(){
-            this.pageSwitch = true
+            this.pageSwitch = 1
         },
         async updateExcuse(){
             try{

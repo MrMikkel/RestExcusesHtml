@@ -14,71 +14,118 @@
     <!--Own CSS-->
     <link rel="stylesheet" href="style.css">
     <title>Undskyldnings8-Ball</title>
-    
+
 </head>
 
 <body>
     <div id="app" class="container">
-        <div v-if="!pageSwitch">
-            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark" style="margin: 10px">Tilbage</button>
-            <div >
-                <input  id="excuseInput" placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse" style="margin: 10px">
-                <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button" class="btn btn-dark"> Opret undskyldning</button>
+        <!-------------------SE, OPRET OG SLET EN SELV-GENERERT UND.--------------------->
+        <div v-if="pageSwitch == 2">
+            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
+                style="margin: 10px">Tilbage</button>
+            <div>
+                <input id="excuseInput" placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse"
+                    style="margin: 10px">
+                <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button" class="btn btn-dark">
+                    Opret undskyldning</button>
                 <div id="CreateExcuse">
                     {{ postMessage }}
                 </div>
             </div>
-            <div >
-                <input id="updateIdInput" type="text" placeholder="Undskyldings id" v-model="excuseToUpdate.id" style="margin: 10px">
-                <input id="updateExcuseInput" type="text" placeholder="ny undskyldings tekst" v-model="excuseToUpdate.excuse" style="margin: 10px">
-                <button style="margin: 10px" v-on:click="updateExcuse()" id="UpdateButton" type="button" class="btn btn-dark">Update</button>
-
-
+            <div>
+                <input id="updateIdInput" type="text" placeholder="Undskyldings id" v-model="excuseToUpdate.id"
+                    style="margin: 10px">
+                <input id="updateExcuseInput" type="text" placeholder="ny undskyldings tekst"
+                    v-model="excuseToUpdate.excuse" style="margin: 10px">
+                <button style="margin: 10px" v-on:click="updateExcuse()" id="UpdateButton" type="button"
+                    class="btn btn-dark">Update</button>
             </div>
 
             <div>
                 <table class="table">
                     <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Undskyldninng</th>
-                        <th></th>
-                      </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Undskyldninng</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody id="getAllExcuses">
                         <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                      <tr v-for="excuse in excuses" >
+                        <tr v-for="excuse in excuses">
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                        <th scope="row">{{ excuse.id }}</th>
-                        <td>
-                            {{ excuse.excuse }}
-                        </td>
-                        <td>
-                            <button v-on:click="deleteExcuse(excuse.id)" v-bind:id="excuse.id" type="button" class="btn btn-danger">Slet undskyldning</button>
-                        </td>
+                            <th scope="row">{{ excuse.id }}</th>
+                            <td>
+                                {{ excuse.excuse }}
+                            </td>
+                            <td>
+                                <button v-on:click="deleteExcuse(excuse.id)" v-bind:id="excuse.id" type="button"
+                                    class="btn btn-danger">Slet undskyldning</button>
+                            </td>
                     </tbody>
-                  </table>
+                </table>
             </div>
         </div>
-        
-        <div v-if="pageSwitch" class="container">
+
+        <!-------------------HISTORIK--------------------->
+        <div class="row">
+            <div class="col" v-if="pageSwitch == 3">
+                <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
+                    style="margin: 10px">Tilbage</button>
+
+                <table class="table categoryStory">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Familie</th>
+                            <th scope="col">Studie</th>
+                            <th scope="col">Fest</th>
+                            <th scope="col">Job</th>
+                        </tr>
+                    </thead>
+                    <tbody id="getAllExcuses">
+                        <!-- Table Row m. for-loop, der løber igennem listen fra js -->
+                        <tr v-for="excuse in excuses">
+                            <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
+                            <td>{{ excuse.id }}</td>
+                            <td>
+                                {{ excuse.excuse }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ppp</td>
+                            <td>øøø</td>
+                            <td>æææ</td>
+                            <td>æææ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-------------------HISTORIK SLUT--------------------->
+
+        <!----- PAGESWITCH -->
+        <div v-if="pageSwitch == 1" class="container">
             <h2><b>Excuses generated</b></h2>
-           
-            
             <!-- Bootstrap Row med col -->
             <div class="row">
-                <button id="switchButton" v-on:click="switchToList()" type="button" class="btn btn-dark btn-lg btn-block margin: 10px">Mine undskyldinger</button>
+                <div class="col">
+                    <button id="switchButton" v-on:click="switchToList()" type="button"
+                        class="btn btn-dark btn-lg btn-block margin: 10px">Mine undskyldinger</button>
+                </div>
+                <div class="col">
+                    <!-- IGANGVÆRENDE -->
+                    <button id="showCatButton" v-on:click="switchToHistory()" type="button"
+                        class="btn btn-dark btn-lg btn-block margin: 10px">Vis historik</button>
+                </div>
             </div>
-            <!-- <div class="col">
-                
-            </div> -->
 
+            <!--Show random excuse in 8-ball-->
             <div class="row">
                 <div class="col-sm">
                 </div>
                 <div class="col-sm backImg center">
                     <!--get all button-->
-                    
+
                     <!--<button id="getButton" v-on:click="getAllSelfGeneratedExcuses()" type="button">Get All</button>
                     <button id="currentMovement" v-on:click="senseMovement()" type="button">Get All movements</button>-->
                     <div class="displayDiv">
@@ -95,10 +142,9 @@
                 <div class="col-sm">
                 </div>
             </div>
-
-
         </div>
     </div>
+
     <!--row slut-->
 
     <!--container slut-->

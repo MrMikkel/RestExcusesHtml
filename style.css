@@ -23,3 +23,18 @@ body, html {
     background-color: whitesmoke;
     text-align: center;
 }
+/*** Vis Historik ***/
+.showCatStory{
+	width: 200px;
+    height: 200px;
+	border: 4px outset grey;
+}
+table.categoryStory{
+    width: 50%;
+    height: 50%;
+    border:3px solid black;
+
+}
+table, th, td {
+    border:3px solid black;
+  }
