@@ -161,12 +161,6 @@ const app = Vue.createApp({
         },
         showUpdateModal(){
             this.$refs.updateModal.style.display = "block"
-            // this.excuseToUpdate.id=this.excuseToUpdateId
-            console.log(this.excuseToUpdate)
-            console.log(this.excuseToUpdateId)
-
-
-            
         },
         hideUpdateModal(){
             this.$refs.updateModal.style.display = "none"
