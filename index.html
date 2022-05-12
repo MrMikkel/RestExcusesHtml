@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,30 +13,23 @@
     <script src="https://unpkg.com/vue@next"></script>
     <!--Own CSS-->
     <link rel="stylesheet" href="style.css">
-    <title>Undskyldnings8-Ball</title>
+    <title>Excuse 8-Ball</title>
 </head>
+
 <body>
     <div id="app" class="container">
         <!---- SE, OPRET OG SLET EN SELV-GENERERT UND. ---->
         <div v-if="pageSwitch == 2">
             <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
-                style="margin: 10px">Tilbage</button>
+                style="margin: 10px">Back</button>
             <div>
                 <input id="excuseInput" placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse"
                     style="margin: 10px">
                 <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button" class="btn btn-dark">
-                    Opret undskyldning</button>
+                    Create excuse</button>
                 <div id="CreateExcuse">
                     {{ postMessage }}
                 </div>
-            </div>
-            <div>
-                <input id="updateIdInput" type="text" placeholder="Undskyldings id" v-model="excuseToUpdate.id"
-                    style="margin: 10px">
-                <input id="updateExcuseInput" type="text" placeholder="ny undskyldings tekst"
-                    v-model="excuseToUpdate.excuse" style="margin: 10px">
-                <button style="margin: 10px" v-on:click="updateExcuse()" id="UpdateButton" type="button"
-                    class="btn btn-dark">Update</button>
             </div>
 
             <div>
@@ -43,7 +37,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Undskyldninng</th>
+                            <th scope="col">Excuses</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,9 +50,33 @@
                                 {{ excuse.excuse }}
                             </td>
                             <td>
-                                <button v-on:click="deleteExcuse(excuse.id)" v-bind:id="excuse.id" type="button"
-                                    class="btn btn-danger">Slet undskyldning</button>
+                                <button style="margin: 10px" v-on:click="this.excuseToUpdate.id = excuse.id; showUpdateModal()" id="UpdateButton" type="button"
+                                    class="btn btn-dark">Update</button>
+                                <button v-on:click=" showDeleteModal();this.excuseToDelete = excuse.id" v-bind:id="excuse.id"
+                                    class="btn btn-danger">Delete</button>
                             </td>
+                        </tr>
+                        <div class="deletemodal" ref="deleteModal">
+                            <div class="modal-content">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p>Are you sure you want to delete this excuse?</p>
+                                    
+                                    <button type="button" v-on:click="deleteExcuse(); hideDeleteModal()">Yes</button>
+                                    <button type="button" v-on:click="hideDeleteModal()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="deletemodal" ref="updateModal">
+                            <div class="modal-content">
+                                <div class="modal-content">
+                                    <input id="updateExcuseInput" type="text" placeholder="updated excuse text"
+                                         v-model="excuseToUpdate.excuse" style="margin: 10px">
+                                    <button type="button" v-on:click="updateExcuse(); hideUpdateModal()">Update</button>
+                                    <button type="button" v-on:click="hideUpdateModal()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
                     </tbody>
                 </table>
             </div>
@@ -67,14 +85,14 @@
         <div class="row">
             <div class="col" v-if="pageSwitch == 3">
                 <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
-                    style="margin: 10px">Tilbage</button>
+                    style="margin: 10px">Back</button>
 
                 <table class="table categoryStory">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Kategori</th>
+                            <th scope="col">Category</th>
 
-                            <th scope="col">Antal</th>
+                            <th scope="col">Amount</th>
 
                         </tr>
                     </thead>
@@ -90,19 +108,19 @@
                     </tbody>
                 </table>
             </div>
-        </div><!----SLUT---->
+        </div>
+        <!----SLUT---->
         <!---- KNAPPER DER SKIFTER PAGE ---->
         <div v-if="pageSwitch == 1" class="container">
-            <h2><b>Excuses generated</b></h2>
             <!-- Bootstrap Row med col -->
             <div class="row">
                 <div class="col">
                     <button id="switchButton" v-on:click="switchToList()" type="button"
-                        class="btn btn-dark btn-lg btn-block margin: 10px">Mine undskyldinger</button>
+                        class="btn btn-dark btn-lg btn-block margin: 10px">My excuses</button>
                 </div>
                 <div class="col">
                     <button id="showCatButton" v-on:click="switchToHistory()" type="button"
-                        class="btn btn-dark btn-lg btn-block margin: 10px">Vis historik</button>
+                        class="btn btn-dark btn-lg btn-block margin: 10px">Show excuse history</button>
                 </div>
             </div>
             <!--SHOW RANDOM EXCUSE IN 8-BALL-->
@@ -123,9 +141,12 @@
                 </div>
                 <div class="col-sm">
                 </div>
-            </div><!--row slut-->
-            </div>   <!--container slut--> 
-            </div>        <!--app id slut-->
+            </div>
+            <!--row slut-->
+        </div>
+        <!--container slut-->
+    </div>
+    <!--app id slut-->
     <!-- Javascript-reference -->
     <script src="script.js"></script>
 </body>

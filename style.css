@@ -1,40 +1,93 @@
-body, html {
-    height: 100%;
+body,
+html {
+  height: 100%;
 }
 
-.backImg{
-    min-width: 450px;
-    min-height: 600px;
-    background-image: url('8ball.png');
-    background-repeat: no-repeat;
-    
-    /* padding-left: 260px;
+.backImg {
+  min-width: 450px;
+  min-height: 600px;
+  background-image: url('8ball.png');
+  background-repeat: no-repeat;
+
+  /* padding-left: 260px;
     padding-top: 200px;
     margin-top: 100px;
     margin-left: 100px;*/
 }
 
-.displayDiv{
-    width: 400px;
-    height: 80px;
-    margin-top: 185px;
-    margin-left: 10px;
-    border: 4px outset grey;
-    background-color: whitesmoke;
-    text-align: center;
+.displayDiv {
+  width: 400px;
+  height: 80px;
+  margin-top: 185px;
+  margin-left: 10px;
+  border: 4px outset grey;
+  background-color: whitesmoke;
+  text-align: center;
 }
+
 /*** Vis Historik ***/
-.showCatStory{
-	width: 200px;
-    height: 200px;
-	border: 4px outset grey;
+.showCatStory {
+  width: 200px;
+  height: 200px;
+  border: 4px outset grey;
 }
-table.categoryStory{
-    width: 50%;
-    height: 50%;
-    border:3px solid black;
+
+table.categoryStory {
+  width: 50%;
+  height: 50%;
+  border: 3px solid black;
 
 }
-table, th, td {
-    border:2px solid grey;
-  }
+
+table,
+th,
+td {
+  border: 2px solid grey;
+}
+
+.deletemodal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

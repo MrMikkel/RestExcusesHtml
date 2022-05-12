@@ -24,7 +24,8 @@ const app = Vue.createApp({
             pageSwitch: 1, //bestemmer hvilken side vises
             excuseToUpdate: {id:null, excuse:""}, // den undskyldning der skal opdateres, gemmes her             
             putMessage: "",
-            showCat: []
+            showCat: [],
+            excuseToDelete:null,
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -130,9 +131,10 @@ const app = Vue.createApp({
                 alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
             }
         },
-        async deleteExcuse(id){
+        
+        async deleteExcuse(){
             try{
-                const result = await axios.delete(baseUrl+"/"+id) // axios laver http-request(Delete) til REST-service
+                const result = await axios.delete(baseUrl+"/"+this.excuseToDelete) // axios laver http-request(Delete) til REST-service
                 this.putMessage= "Response: " + result.status + " " + result.statusText //post message updateres
                 this.getAllSelfGeneratedExcuses() // henter listen igen
             } catch(ex){ // exception 
@@ -149,5 +151,25 @@ const app = Vue.createApp({
                     alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
                 } 
         },
+        showDeleteModal(){
+            this.$refs.deleteModal.style.display = "block"
+            console.log(this.excuseToDelete)
+            
+        },
+        hideDeleteModal(){
+            this.$refs.deleteModal.style.display = "none"
+        },
+        showUpdateModal(){
+            this.$refs.updateModal.style.display = "block"
+            // this.excuseToUpdate.id=this.excuseToUpdateId
+            console.log(this.excuseToUpdate)
+            console.log(this.excuseToUpdateId)
+
+
+            
+        },
+        hideUpdateModal(){
+            this.$refs.updateModal.style.display = "none"
+        }
     }
 }).mount("#app") // appen bliver mounted
