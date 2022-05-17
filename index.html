@@ -37,24 +37,25 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Excuses</th>
-                            <th></th>
+                            <th style="width:5%"scope="col">#</th>
+                            <th style="width:80%" scope="col">Excuses</th>
+                            <th style="width:15%;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody id="getAllExcuses">
                         <!-- Table Row m. for-loop, der løber igennem listen fra js -->
                         <tr v-for="excuse in excuses">
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                            <th scope="row">{{ excuse.id }}</th>
+                            <th style="text-align:center" scope="row">{{ excuse.id }}</th>
                             <td>
                                 {{ excuse.excuse }}
+                                
                             </td>
-                            <td>
-                                <button style="margin: 10px"
+                            <td style="text-align:center">
+                                <button style="margin: 5px;"
                                     v-on:click="this.excuseToUpdate.id = excuse.id; showUpdateModal()" id="UpdateButton"
                                     type="button" class="btn btn-dark" title="Update"><i class="fa fa-edit"></i></button>
-                                <button v-on:click="showDeleteModal();this.excuseToDelete = excuse.id"
+                                <button style="margin: 5px;" v-on:click="showDeleteModal();this.excuseToDelete = excuse.id"
                                     v-bind:id="excuse.id" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
