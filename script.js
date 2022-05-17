@@ -26,11 +26,13 @@ const app = Vue.createApp({
             putMessage: "",
             showCat: [],
             excuseToDelete:null,
+            textToSpeech:""
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
         //bliver kaldt ved appens "fødsel", aka start, når programmet starter køre metoden
         this.senseMovement()
+
     },
     methods: {
         getAllSelfGeneratedExcuses() { // GET-metode til at hente alle selvoprettede undskyldninger
@@ -46,6 +48,18 @@ const app = Vue.createApp({
             }
         },
         async getRandomNewExcusesHelper(url) { // helper-metode til at hente alle selvoprettede undskyldninger
+            try { // fejlhåndtering
+                const result = await axios.get(url) // axios laver http-request(get) til REST-service
+                if(result == null){
+                    this.randomExcuse = ""
+                }
+                this.randomExcuse = result.data[0] // array bliver fyldt med data
+                console.log(this.randomExcuse) // udskrift til konsollen
+            } catch (ex) { // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+        },
+        async getRandomNewCustomExcusesHelper(url) { // helper-metode til at hente alle selvoprettede undskyldninger
             try { // fejlhåndtering
                 const result = await axios.get(url) // axios laver http-request(get) til REST-service
                 if(result == null){
@@ -101,7 +115,7 @@ const app = Vue.createApp({
                 this.getRandomNewExcusesHelper(partyUrl)
             }
             else if (this.currentMovement.movement == "shake") { //hvis pien rystes får man en selv lavet undskyldning
-                this.getRandomNewExcusesHelper(baseUrl+"/random")
+                this.getRandomNewCustomExcusesHelper(baseUrl+"/random")
             }
             else{
                 this.randomExcuse=""
@@ -180,6 +194,12 @@ const app = Vue.createApp({
         },
         hideUpdateModal(){
             this.$refs.updateModal.style.display = "none"
+        },
+        //tager vores randomExcuse og læser den højt på engelsk
+        txtSpeech(){
+            let utter = new SpeechSynthesisUtterance(this.randomExcuse.excuse);
+            utter.lang = 'en-US'
+            window.speechSynthesis.speak(utter);
         }
 
     }

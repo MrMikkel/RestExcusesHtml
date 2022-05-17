@@ -23,11 +23,13 @@
     <div id="app" class="container">
         <!---- SE, OPRET OG SLET EN SELV-GENERERT UND. ---->
         <div v-if="pageSwitch == 2">
-            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark" style="margin: 10px; margin-left: 0px;" title="Back"><i class="fa fa-arrow-left"></i>	</button>
+            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
+                style="margin: 10px; margin-left: 0px;" title="Back"><i class="fa fa-arrow-left"></i> </button>
             <div>
                 <input id="excuseInput" placeholder="Enter new excuse..." type="text" v-model="newExcuse.excuse"
                     style="margin: 10px; margin-left: 0px;">
-                <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button" class="btn btn-dark" title="Create excuse"> <i class="fa fa-plus-circle"></i></button>
+                <button id="CreateButton" v-on:click="postSelfGeneratedExcuses()" type="button" class="btn btn-dark"
+                    title="Create excuse"> <i class="fa fa-plus-circle"></i></button>
                 <div id="CreateExcuse">
                     {{ postMessage }}
                 </div>
@@ -37,7 +39,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th style="width:5%"scope="col">#</th>
+                            <th style="width:5%" scope="col">#</th>
                             <th style="width:80%" scope="col">Excuses</th>
                             <th style="width:15%;" scope="col"></th>
                         </tr>
@@ -49,14 +51,16 @@
                             <th style="text-align:center" scope="row">{{ excuse.id }}</th>
                             <td>
                                 {{ excuse.excuse }}
-                                
+
                             </td>
                             <td style="text-align:center">
                                 <button style="margin: 5px;"
                                     v-on:click="this.excuseToUpdate.id = excuse.id; showUpdateModal()" id="UpdateButton"
-                                    type="button" class="btn btn-dark" title="Update"><i class="fa fa-edit"></i></button>
-                                <button style="margin: 5px;" v-on:click="showDeleteModal();this.excuseToDelete = excuse.id"
-                                    v-bind:id="excuse.id" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></button>
+                                    type="button" class="btn btn-dark" title="Update"><i
+                                        class="fa fa-edit"></i></button>
+                                <button style="margin: 5px;"
+                                    v-on:click="showDeleteModal();this.excuseToDelete = excuse.id" v-bind:id="excuse.id"
+                                    class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -87,7 +91,7 @@
         <div class="row">
             <div class="col" v-if="pageSwitch == 3">
                 <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
-                    style="margin: 10px; margin-left: 0px;" title="Back"><i class="fa fa-arrow-left"></i>	</button>
+                    style="margin: 10px; margin-left: 0px;" title="Back"><i class="fa fa-arrow-left"></i> </button>
                 <button id="clearButton" v-on:click="showDeletHistoryModal()" type="button" class="btn btn-dark"
                     style="margin: 10px"> Clear
                     history </button>
@@ -97,7 +101,7 @@
                         <tr>
                             <th scope="col">Category</th>
 
-                            <th style="text-align: center;"scope="col">Amount</th>
+                            <th style="text-align: center;" scope="col">Amount</th>
 
                         </tr>
                     </thead>
@@ -108,18 +112,18 @@
                             <td>
                                 {{ category.category }}
                             </td>
-                            <td style="text-align:center" >{{ category.count }}</td>
+                            <td style="text-align:center">{{ category.count }}</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="deletemodal" ref="deletHistoryModal">
-                        <div class="modal-content">
-                            <h4> Are you sure you want to clear the catagory history? </h4>
-                            <button id="clearConfirm" type="button" class="btn btn-danger" style="margin: 5px;"
-                                v-on:click="clearHistory(); hideDeletHistoryModal()">Clear history</button>
-                            <button type="button" class="btn btn-dark" style="margin: 5px;"
-                                v-on:click=" hideDeletHistoryModal()">Cancel</button>
-                        </div>
+                    <div class="modal-content">
+                        <h4> Are you sure you want to clear the catagory history? </h4>
+                        <button id="clearConfirm" type="button" class="btn btn-danger" style="margin: 5px;"
+                            v-on:click="clearHistory(); hideDeletHistoryModal()">Clear history</button>
+                        <button type="button" class="btn btn-dark" style="margin: 5px;"
+                            v-on:click=" hideDeletHistoryModal()">Cancel</button>
+                    </div>
                 </div>
             </div>
 
@@ -137,6 +141,8 @@
                     <button id="showCatButton" v-on:click="switchToHistory()" type="button"
                         class="btn btn-dark btn-lg btn-block margin: 10px">Show excuse history</button>
                 </div>
+
+
             </div>
             <!--SHOW RANDOM EXCUSE IN 8-BALL-->
             <div class="row">
@@ -144,19 +150,22 @@
                 </div>
                 <div class="col-sm backImg center">
                     <div class="displayDiv">
+
+
                         <div id="getExcuse" v-if="randomExcuse">
                             <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                            {{randomExcuse.excuse}}
-                            <div v-for="excuse in randomExcuse">
-                                <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
-                                {{excuse.excuse}}
-                            </div>
+                            <button style="margin: 5px;" class="btn btn-dark"
+                            v-on:click="txtSpeech()"><i class="fa fa-volume-up"></i></button>
+                            <span>{{randomExcuse.excuse}}</span>
+
+                            <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
                         </div>
                     </div>
                 </div>
                 <div class="col-sm">
                 </div>
             </div>
+
             <!--row slut-->
         </div>
         <!--container slut-->
