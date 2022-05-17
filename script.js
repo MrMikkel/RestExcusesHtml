@@ -151,6 +151,16 @@ const app = Vue.createApp({
                     alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
                 } 
         },
+       async clearHistory(){
+            try{
+                const result = await axios.delete(baseMovementUrl) // axios laver http-request(Delete) til REST-service
+                this.putMessage= "Response: " + result.status + " " + result.statusText //post message slettes
+                this.showCategory() // henter listen igen
+            } catch(ex){ // exception 
+                alert(ex.message) // fejlmeddelelse i tilfælde af at noget gik galt
+            }
+            
+        },
         showDeleteModal(){
             this.$refs.deleteModal.style.display = "block"
             console.log(this.excuseToDelete)
@@ -159,11 +169,18 @@ const app = Vue.createApp({
         hideDeleteModal(){
             this.$refs.deleteModal.style.display = "none"
         },
+        hideDeletHistoryModal(){
+            this.$refs.deletHistoryModal.style.display = "none"
+        },
+        showDeletHistoryModal(){
+            this.$refs.deletHistoryModal.style.display = "block"
+        },
         showUpdateModal(){
             this.$refs.updateModal.style.display = "block"
         },
         hideUpdateModal(){
             this.$refs.updateModal.style.display = "none"
         }
+
     }
 }).mount("#app") // appen bliver mounted

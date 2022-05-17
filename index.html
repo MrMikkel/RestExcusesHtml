@@ -13,6 +13,9 @@
     <script src="https://unpkg.com/vue@next"></script>
     <!--Own CSS-->
     <link rel="stylesheet" href="style.css">
+    <!--Icon links-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Excuse 8-Ball</title>
 </head>
 
@@ -20,8 +23,7 @@
     <div id="app" class="container">
         <!---- SE, OPRET OG SLET EN SELV-GENERERT UND. ---->
         <div v-if="pageSwitch == 2">
-            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
-                style="margin: 10px">Back</button>
+            <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark" style="margin: 10px">Back</button>
             <div>
                 <input id="excuseInput" placeholder="Ny undskyldning her..." type="text" v-model="newExcuse.excuse"
                     style="margin: 10px">
@@ -50,10 +52,11 @@
                                 {{ excuse.excuse }}
                             </td>
                             <td>
-                                <button style="margin: 10px" v-on:click="this.excuseToUpdate.id = excuse.id; showUpdateModal()" id="UpdateButton" type="button"
-                                    class="btn btn-dark">Update</button>
-                                <button v-on:click=" showDeleteModal();this.excuseToDelete = excuse.id" v-bind:id="excuse.id"
-                                    class="btn btn-danger">Delete</button>
+                                <button style="margin: 10px"
+                                    v-on:click="this.excuseToUpdate.id = excuse.id; showUpdateModal()" id="UpdateButton"
+                                    type="button" class="btn btn-dark">Update <i class="fa fa-edit"></i></button>
+                                <button v-on:click=" showDeleteModal();this.excuseToDelete = excuse.id"
+                                    v-bind:id="excuse.id" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                         <div class="deletemodal" ref="deleteModal">
@@ -61,9 +64,11 @@
                                 <div class="modal-content">
                                     <span class="close">&times;</span>
                                     <p>Are you sure you want to delete this excuse?</p>
-                                    
-                                    <button type="button" v-on:click="deleteExcuse(); hideDeleteModal()">Yes</button>
-                                    <button type="button" v-on:click="hideDeleteModal()">Cancel</button>
+
+                                    <button type="button" class="btn btn-danger" style="margin: 5px;"
+                                        v-on:click="deleteExcuse(); hideDeleteModal()">Yes</button>
+                                    <button type="button" class="btn btn-dark" style="margin: 5px;"
+                                        v-on:click="hideDeleteModal()">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -71,9 +76,11 @@
                             <div class="modal-content">
                                 <div class="modal-content">
                                     <input id="updateExcuseInput" type="text" placeholder="updated excuse text"
-                                         v-model="excuseToUpdate.excuse" style="margin: 10px">
-                                    <button type="button" v-on:click="updateExcuse(); hideUpdateModal()">Update</button>
-                                    <button type="button" v-on:click="hideUpdateModal()">Cancel</button>
+                                        v-model="excuseToUpdate.excuse" style="margin: 10px">
+                                    <button type="button" class="btn btn-primary" style="margin: 5px;"
+                                        v-on:click="updateExcuse(); hideUpdateModal()">Update</button>
+                                    <button type="button" class="btn btn-dark" style="margin: 5px;"
+                                        v-on:click="hideUpdateModal()">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -86,6 +93,9 @@
             <div class="col" v-if="pageSwitch == 3">
                 <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
                     style="margin: 10px">Back</button>
+                <button id="clearButton" v-on:click="showDeletHistoryModal()" type="button" class="btn btn-dark"
+                    style="margin: 10px"> Clear
+                    history </button>
 
                 <table class="table categoryStory">
                     <thead class="thead-dark">
@@ -107,6 +117,17 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="deletemodal" ref="deletHistoryModal">
+                    <div class="modal-content">
+                        <div class="modal-content">
+                            <h4> Are you sure you want to clear the catagory history? </h4>
+                            <button type="button" class="btn btn-danger" style="margin: 5px;"
+                                v-on:click="clearHistory(); hideDeletHistoryModal()">Clear history</button>
+                            <button type="button" class="btn btn-dark" style="margin: 5px;"
+                                v-on:click=" hideDeletHistoryModal()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!----SLUT---->
