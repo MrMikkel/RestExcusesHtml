@@ -2,6 +2,11 @@ body,
 html {
   height: 100%;
 }
+.center {
+ margin-right: auto;
+ margin-left: auto;
+
+}
 
 .backImg {
   min-width: 450px;
