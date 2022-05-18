@@ -21,6 +21,7 @@
 
 <body>
     <div id="app" class="container">
+        <h1 class="text-center m-5 font-weight-bold">Excuse Master</h1>
         <!---- SE, OPRET OG SLET EN SELV-GENERERT UND. ---->
         <div v-if="pageSwitch == 2">
             <button v-on:click="switchTo8ball()" type="button" class="btn btn-dark"
@@ -134,21 +135,18 @@
             <!-- Bootstrap Row med col -->
             <div class="row">
                 <div class="col">
-                    <button id="switchButton" v-on:click="switchToList()" type="button"
-                        class="btn btn-dark btn-lg btn-block margin: 10px">My excuses</button>
+                   
                 </div>
                 <div class="col">
-                    <button id="showCatButton" v-on:click="switchToHistory()" type="button"
-                        class="btn btn-dark btn-lg btn-block margin: 10px">Show excuse history</button>
+                  
                 </div>
-
-
             </div>
             <!--SHOW RANDOM EXCUSE IN 8-BALL-->
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" >
+                  
                 </div>
-                <div class="col-sm backImg center">
+                <div class="col-sm backImg center" >
                     <div class="displayDiv">
                         <div id="getExcuse" v-if="randomExcuse">
                             <!-- Table Row m. for-loop, der løber igennem listen fra js -->
@@ -160,9 +158,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm" >
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm col-md">
+                    <!--empty-->
+                </div>
+                <div class="col-sm col-md" style="margin-top: 30px;">
+                    <button id="switchButton" v-on:click="switchToList()" type="button"
+                    class="btn btn-dark btn-lg btn-block" style="float:left">My excuses</button>
+                </div>
+                <div class="col-sm col-md" style="margin-top: 30px;"> 
+                    <button id="showCatButton" v-on:click="switchToHistory()" type="button"
+                    class="btn btn-dark btn-lg btn-block" >Excuse history</button>  
+                </div>
+                <div class="col-sm col-md">
+                    <!--empty-->
+                </div>
+            </div>
+
 
             <!--row slut-->
         </div>

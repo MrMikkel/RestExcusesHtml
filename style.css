@@ -10,7 +10,7 @@ html {
 
 .backImg {
   min-width: 450px;
-  min-height: 600px;
+  min-height: 450px;
   background-image: url('8ball.png');
   background-repeat: no-repeat;
 
@@ -20,11 +20,16 @@ html {
     margin-left: 100px;*/
 }
 
+/*button main*/
+
+
+
+
 .displayDiv {
-  width: 400px;
-  height: 80px;
-  margin-top: 185px;
-  margin-left: 10px;
+  min-width: 400px;
+  min-height: 55px;
+  margin-top: 195px;
+  margin-left: 2px;
   border: 4px outset grey;
   background-color: whitesmoke;
   text-align: center;
