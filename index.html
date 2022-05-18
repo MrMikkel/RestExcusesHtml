@@ -150,13 +150,11 @@
                 </div>
                 <div class="col-sm backImg center">
                     <div class="displayDiv">
-
-
                         <div id="getExcuse" v-if="randomExcuse">
                             <!-- Table Row m. for-loop, der løber igennem listen fra js -->
-                            <button style="margin: 5px;" class="btn btn-dark"
+                            <button style="margin: 5px; float:left" class="btn btn-dark"
                             v-on:click="txtSpeech()"><i class="fa fa-volume-up"></i></button>
-                            <span>{{randomExcuse.excuse}}</span>
+                            <span class="center-block">{{randomExcuse.excuse}}</span>
 
                             <!-- første 'excuse' refererer til linjen herover, næste refererer til JSON-objektet fra databasen -->
                         </div>
