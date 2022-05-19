@@ -26,7 +26,8 @@ const app = Vue.createApp({
             putMessage: "",
             showCat: [],
             excuseToDelete:null,
-            textToSpeech:""
+            textToSpeech:"",
+            category:""
         }
     },
     created() { // Livcyklus-metoder, der står inde i created(), 
@@ -104,21 +105,32 @@ const app = Vue.createApp({
             //oversætter bevæg. til kategori
             if (this.currentMovement.movement == "right") { //hvis pien går til højre får den en undskyldning fra familie kategorien 
                 this.getRandomNewExcusesHelper(familyUrl)
+                this.category="Family: "
             }
             else if (this.currentMovement.movement == "left") { //hvis pien går til venstre får den en undskyldning fra arbejde kategorien
                 this.getRandomNewExcusesHelper(workUrl)
+                this.category="Work: "
+
             }
             else if (this.currentMovement.movement == "front") { //hvis pien går til frem får den en undskyldning fra skole kategorien
                 this.getRandomNewExcusesHelper(collegeUrl)
+                this.category="College: "
+
             }
             else if (this.currentMovement.movement == "back") { //hvis pien går til tilbage får den en undskyldning fra fest kategorien
                 this.getRandomNewExcusesHelper(partyUrl)
+                this.category="Party: "
+
             }
             else if (this.currentMovement.movement == "shake") { //hvis pien rystes får man en selv lavet undskyldning
                 this.getRandomNewCustomExcusesHelper(baseUrl+"/random")
+                this.category="My excuses: "
+
             }
             else{
                 this.randomExcuse=""
+                this.category=""
+
             }
         },
         // snuppet fra https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
