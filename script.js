@@ -135,7 +135,6 @@ const app = Vue.createApp({
             else{
                 this.randomExcuse=""
                 this.category=""
-
             }
         },
         // snuppet fra https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
